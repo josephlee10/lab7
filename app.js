@@ -10,7 +10,8 @@ var handlebars = require('express3-handlebars');
 var mongoose = require('mongoose');
 
 var index = require('./routes/index');
-var project = require('./routes/project');
+var add = require('./routes/add');
+// var project = require('./routes/project');
 // Example route
 // var user = require('./routes/user');
 
@@ -45,9 +46,23 @@ if ('development' == app.get('env')) {
 
 // Add routes here
 app.get('/', index.view);
-app.get('/project/:id', project.projectInfo);
-app.post('/project/new', project.addProject);
-app.post('/project/:id/delete', project.deleteProject);
+
+app.get('/uploadPage', add.view); // This will load the upload page
+app.get('/upload', add.addFood);
+// app.get('/favs', favs.view);
+// app.get('/profile', profile.view);
+// app.get('/search_results', search_results.view);
+// //app.get('/addComments', add.addComments);
+// app.get('/liked/:id', favs.likedFoodInfo);
+// app.get('/commented/:id&:comments', add.addComments);
+
+
+
+
+
+// app.get('/project/:id', project.projectInfo);
+// app.post('/project/new', project.addProject);
+// app.post('/project/:id/delete', project.deleteProject);
 // Example route
 // app.get('/users', user.list);
 

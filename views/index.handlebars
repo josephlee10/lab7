@@ -2,13 +2,17 @@
 
 <html>
 <head>
-	<title>HCI Project Portfolio</title>	
+	<title>Food Bytes</title>	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">
-	<link href="/css/introHCI.css" rel="stylesheet">
-	<!-- this is a comment in HTML -->
+	
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<script src="../js/hci-friends.js"></script>
+
+	<link href="../css/search/styles.css" rel="stylesheet"/>
+	<link href="../css/bootstrap.css" rel="stylesheet"/>
+	<link href="../css/foodPorn.css" rel="stylesheet"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -19,56 +23,72 @@
 </head>
 
 <body>
-	<div class="container">
-		<!-- h1 through h6 are headers. The higher the number, the smaller the header -->
-		<!-- p means paragraph -->
-		<div class="jumbotron">
-			<h1>Michael Bernstein</h1>
-			<p>human-computer interaction &middot; social computing &middot; crowdsourcing</p>
-		</div>
 
-		<h4>Projects</h4>
-		<!-- divs are invisible structuring elements that stack vertically by default. Use them to organize your code -->
-		<!-- img tags are images. Lorem Pixel will deliver random images; handy! -->
-		<!-- a are anchors, also known as hyperlinks. Use the href attribute to tell the browser where to go when the user clicks -->
-		{{#each projects}}
-		<div class="project" id="project{{id}}">
-			<div class="thumbnail">
-				<a href="#">
-					<img src="{{image}}" alt="Lorem Pixel image" class="img project-img">
-					<p>{{title}}</p>
-				</a>
-				<div class="details"></div>
+	<div class="container">
+
+    <div class="navigation">
+    	<div class="centered-pills">
+			<ul class="nav nav-pills">
+				<li><a href="#"><button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-cutlery"></span> Food Bytes</button></a></li>
+  				<li><a href="#"><button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-home"></span> Home</button></a></li>
+  				<li><a href="/uploadPage"><button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-upload"></span> Upload</button></a></li>
+			</ul>	
+		</div>
+	</div>
+	<div>
+		{{#each allFoods}}
+		<div class="foods" id="{{id}}">
+			<h3>{{food_name}}</h3>
+			<div class="image_and_like">
+				<a href="#"><button type="button" class="btn btn-default" id="like"><span class="glyphicon glyphicon-heart-empty"></span></button></a>
+				<img src="{{imageURL}}" alt="Food Photos" class="img img-rounded hand" data-toggle="modal" data-target="#myModal">
 			</div>
+			<p>{{description}}</p>
+
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h2 class="modal-title" id="myModalLabel">{{name}}</h2>
+					</div>
+					<div class="modal-body">
+						<div class="image_and_comments">
+						<img src="{{imageURL}}" alt="Food Photos" class="img img-rounded">
+						<div class="comments">
+							<h4>Comments: </h4>
+							{{#each comments}}
+							<p>{{username}} said "{{comment}}"</p>
+							{{/each}}
+
+							<div class="addComment">
+								<form id="addCommentForm" role="form" method="get">
+					    			<div class="form-group">
+	    								<input type="text" class="form-control" id="comment" placeholder="add comments" name="comment">
+	    							</div>
+	    							<input type="submit" id="addCommentBtn" class="btn btn-default" value="Add Comment"></input>
+								</form>
+							</div>s
+						</div>
+						</div>
+						<h3>{{tags}} <a href="#">get recipe</a></h3>
+					</div>
+				
+					<div class="modal-footer">
+        				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      				</div>
+      			</div>
+      		</div>
 		</div>
 		{{/each}}
-
-	<hr />
-
-	<form id="new-project-form" role="form">
-    <div class="form-group">
-      <label for="title">Title for New Project:</label>
-      <input type="text" class="form-control" id="title" placeholder="Project Name">
-    </div>
-    <div class="form-group">
-      <label for="image_url">Project image URL</label>
-      <input type="text" class="form-control" id="image_url" placeholder="http://www.example.com/really_cool_image.jpg">
-    </div>
-    <div class="form-group">
-      <label for="date">Date</label>
-      <input type="text" class="form-control" id="date" placeholder="January 1">
-    </div>
-    <div class="form-group">
-      <label for="summary">Summary</label>
-      <textarea type="text" class="form-control" id="summary" rows="3" placeholder="Wow, Very Project!  So much summary!"></textarea>
-    </div>
-    <button id="newProjectSubmitButton" type="button" class="btn btn-default">Submit</button>
-  </form>
+	</div>
 
 	</div>
 
 	<script src="https://code.jquery.com/jquery.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/introHCI.js"></script>
+	<script type="text/javascript" src="../js/search/jquery-1.8.2.min.js"></script>
+    <!--<script type="text/javascript" src="../js/search/jquery.mockjax.js"></script>-->
+    <script type="text/javascript" src="../js/search/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="../js/search/foods.js"></script>
+    <!--<script type="text/javascript" src="../js/search/demo.js"></script>-->
 </body>
 </html>
